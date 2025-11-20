@@ -17,6 +17,7 @@ package server
 import (
 	"github.com/sigstore/fulcio/pkg/config"
 	"github.com/sigstore/fulcio/pkg/identity"
+	"github.com/sigstore/fulcio/pkg/identity/aws_sts"
 	"github.com/sigstore/fulcio/pkg/identity/buildkite"
 	"github.com/sigstore/fulcio/pkg/identity/chainguard"
 	"github.com/sigstore/fulcio/pkg/identity/ciprovider"
@@ -76,6 +77,8 @@ func getIssuer(meta string, i config.OIDCIssuer) identity.Issuer {
 		return uri.Issuer(issuerURL)
 	case config.IssuerTypeUsername:
 		return username.Issuer(issuerURL)
+	case config.IssuerTypeAWSSTS:
+		return aws_sts.Issuer(issuerURL)
 	}
 	return nil
 }

@@ -26,6 +26,7 @@ import (
 
 	"github.com/sigstore/fulcio/pkg/config"
 	"github.com/sigstore/fulcio/pkg/identity"
+	"github.com/sigstore/fulcio/pkg/identity/aws_sts"
 	"github.com/sigstore/fulcio/pkg/identity/buildkite"
 	"github.com/sigstore/fulcio/pkg/identity/ciprovider"
 	"github.com/sigstore/fulcio/pkg/identity/email"
@@ -80,6 +81,8 @@ func PrincipalFromIDToken(ctx context.Context, tok *oidc.IDToken) (identity.Prin
 		principal, err = kubernetes.PrincipalFromIDToken(ctx, tok)
 	case config.IssuerTypeURI:
 		principal, err = uri.PrincipalFromIDToken(ctx, tok)
+	case config.IssuerTypeAWSSTS:
+		principal, err = aws_sts.PrincipalFromIDToken(ctx, tok)
 	case config.IssuerTypeUsername:
 		principal, err = username.PrincipalFromIDToken(ctx, tok)
 	case config.IssuerTypeCIProvider:

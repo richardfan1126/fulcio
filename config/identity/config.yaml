@@ -140,6 +140,9 @@ meta-issuers:
     client-id: sigstore
     type: ci-provider
     ci-provider: *github-type
+  https://*.tokens.sts.global.api.aws:
+    client-id: sigstore
+    type: aws-sts
 ci-issuer-metadata:
   *github-type:
     default-template-values:

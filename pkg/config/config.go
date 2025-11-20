@@ -399,6 +399,7 @@ const (
 	IssuerTypeURI               = "uri"
 	IssuerTypeUsername          = "username"
 	IssuerTypeCIProvider        = "ci-provider"
+	IssuerTypeAWSSTS            = "aws-sts"
 )
 
 func parseConfig(b []byte) (cfg *FulcioConfig, err error) {
@@ -681,6 +682,8 @@ func issuerToChallengeClaim(issType IssuerType, challengeClaim string) string {
 	case IssuerTypeSpiffe:
 		return "sub"
 	case IssuerTypeURI:
+		return "sub"
+	case IssuerTypeAWSSTS:
 		return "sub"
 	case IssuerTypeUsername:
 		return "sub"
