@@ -42,3 +42,4 @@ hack/tools/bin
 # macOS
 .DS_Store
 certificate-maker
+config/ctfe-data/

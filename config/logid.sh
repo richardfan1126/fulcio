@@ -56,3 +56,8 @@ mv $(ls tmpcert-* | tail -1) /etc/config/root.pem
 rm tmpcert-* tmpchain.pem
 cat /etc/config/root.pem
 echo "Fetched valid root certificate from Fulcio to limit entries in CTFE instance"
+
+# Fix permissions so ct_server can read the files
+chmod 755 /etc/config
+chmod 644 /etc/config/* 2>/dev/null || true
+ls -la /etc/config/
